@@ -1,3 +1,7 @@
+
+
+
+
 # MicroStrategy-Python-REST-API
 
 <a id='top'></a>
@@ -149,6 +153,12 @@ def login(baseURL,username,password):
 authToken, cookies = login(baseURL,username,password)
 ```
 
+```bash
+>> output
+Token: 5q4mb2nlcpk434ol4ors52sb5h
+Session ID: {'JSESSIONID': '3F23A282B4A7FAE9BB4E99C50EDA4321'}
+```
+
 
 
 <a id='test'></a>
@@ -195,6 +205,12 @@ def sessionValiade(baseURL, authToken, cookies):
 sessionValiade(baseURL, authToken, cookies)
 ```
 
+```bash
+>> output
+Checking session...
+{"locale":1033,"maxSearch":3,"workingSet":10,"timeout":600,"id":"54F3D26011D2896560009A8E67019608","fullName":"Administrator","initials":"A"}
+```
+
 
 
 <a id='user'></a>
@@ -229,6 +245,14 @@ def userInfo(baseURL, authToken, cookies):
 ```python
 user = userInfo(baseURL, authToken, cookies)
 ```
+
+\>> output
+
+|      | fullName      | id                               | initials | metadataUser |
+| ---- | ------------- | -------------------------------- | -------- | ------------ |
+| 0    | Administrator | 54F3D26011D2896560009A8E67019608 | A        | True         |
+
+
 
 <a id='library'></a>
 
@@ -273,6 +297,13 @@ def getLibrary(baseURL, authToken, cookies, flag):
 libraryInfo = getLibrary(baseURL, authToken, cookies, 'FILTER_TOC')
 ```
 
+\>> output
+
+|      | id                               | name                                 | projectId                        | active | lastViewedTime               |
+| ---- | -------------------------------- | ------------------------------------ | -------------------------------- | ------ | ---------------------------- |
+| 0    | 21A521BA4DB47ADAEBE19E9E9F7EC7D9 | Executive Business User Data Dossier | B19DEDCC11D4E0EFC000EB9495D0F44F | True   | 2018-08-08T16:57:48.000+0000 |
+| 1    | 21A521BA4DB47ADAEBE19E9E9F7EC7D9 | Category Breakdown Dossier           | B19DEDCC11D4E0EFC000EB9495D0F44F | True   | 2018-08-08T16:59:08.000+0000 |
+
 <a id='projects'></a>
 
 ## List of Projects
@@ -314,7 +345,13 @@ def listProjects(baseURL, authToken, cookies):
 projectList = listProjects(baseURL, authToken, cookies)
 ```
 
+\>> output
 
+|      | id                               | name                            | description                                       | status |
+| ---- | -------------------------------- | ------------------------------- | ------------------------------------------------- | ------ |
+| 0    | B19DEDCC11D4E0EFC000EB9495D0F44F | MicroStrategy Tutorial          | MicroStrategy Tutorial project and application... | 0      |
+| 1    | AF09B3E3458F78B4FBE4DEB68528BF7B | Human Resources Analysis Module | The Human Resources Analysis Module analyses w... | 0      |
+| 2    | 4DD3B04B40D227471401609D630C76ED | Enterprise Manager              |                                                   | 0      |
 
 <a id='search'></a>
 
@@ -364,7 +401,13 @@ def searchObjects(baseURL, authToken, stype):
 mySearch = searchObjects(baseURL, authToken, '39')
 ```
 
+\>> output
 
+|      | acg  | dateCreated                  | dateModified                 | extType | id                               | name                                       | owner                                             | subtype | type | version                          |
+| ---- | ---- | ---------------------------- | ---------------------------- | ------- | -------------------------------- | ------------------------------------------ | ------------------------------------------------- | ------- | ---- | -------------------------------- |
+| 0    | 255  | 2005-06-27T21:33:41.000+0000 | 2010-09-13T10:40:53.000+0000 | 0       | 87F09D2EBB9B462CAC4581ABCAD97BBD | Search for all objects of type Grid        | {'name': 'Administrator', 'id': '54F3D26011D28... | 9984    | 39   | 08B3974B493CE1E84106EB825B71CB6A |
+| 1    | 255  | 2005-06-27T21:33:42.000+0000 | 2005-06-27T21:33:42.000+0000 | 0       | 8A7CAF697BB64191BA3E15FA10DEDA61 | Search for all objects of type Text Prompt | {'name': 'Administrator', 'id': '54F3D26011D28... | 9984    | 39   | AC6316004E27925A85DDDF928D276A43 |
+| 2    | 255  | 2010-04-12T11:13:59.000+0000 | 2010-04-12T11:13:59.000+0000 | 0       | 9F4A56074EDD734CBEFFC79A68BC36AF | MicroStrategy Web User Objects             | {'name': 'Administrator', 'id': '54F3D26011D28... | 9984    | 39   | 5726EAF84C05E5B3854423A0E8BA1106 |
 
 <a id='cubeobjects'></a>
 
@@ -412,6 +455,16 @@ def cubeObjects(baseURL, authToken, projectId, cookies, cubeId):
 cObjects = cubeObjects(baseURL, authToken, projectId, cookies, 'BD23848347017FC2C0B4509AED1AF7B4')
 ```
 
+\>> output
+
+|      | id                               | name          | type      |
+| ---- | -------------------------------- | ------------- | --------- |
+| 0    | 8D679D3811D3E4981000E787EC6DE8A4 | Country       | Attribute |
+| 1    | 8D679D3611D3E4981000E787EC6DE8A4 | Catalog       | Attribute |
+| 2    | 8D679D3711D3E4981000E787EC6DE8A4 | Gross Revenue | Metric    |
+
+
+
 <a id='exit'></a>
 
 ##  Log Out and end session
@@ -433,5 +486,10 @@ def logout(baseURL,authToken):
 
 ```python
 logout(baseURL, authToken)
+```
+
+```bash
+>> output
+Logged Out
 ```
 
