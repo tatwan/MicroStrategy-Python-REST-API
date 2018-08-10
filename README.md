@@ -263,7 +263,6 @@ Implementation Notes (source: MicroStrategy Documentation)
 Get the library for the authenticated user. You obtain the authorization token needed to execute the request using POST /auth/login; you pass the authorization token in the request header.
 
 ```python
-def getLibrary(baseURL, authToken, cookies, flag):
     """
     Get library for authenticated user.
     
@@ -286,8 +285,14 @@ def getLibrary(baseURL, authToken, cookies, flag):
                  'Accept': 'application/json'}
     r = requests.get(baseURL + "library?outputFlag="+ flag, headers=header, cookies=cookies)
     
-    if r.ok:
-        return pd.DataFrame(json.loads(r.text))[['id', 'name', 'projectId', 'active','lastViewedTime']]
+    if r.ok:            
+        a = pd.DataFrame(json.loads(r.text))[['id', 'name', 'projectId', 'active','lastViewedTime']]
+        tmp = []
+        if (flag == 'DEFAULT'):
+            for i in json.loads(r.text):
+                tmp.append(i['target']['id'])
+            a['target'] = pd.DataFrame(tmp).astype(str)
+        return a
     else:
         print("HTTP {} - {}, Message {}".format(r.status_code, r.reason, r.text))
         return []
